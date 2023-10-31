@@ -69,6 +69,7 @@
     "@typescript-eslint/parser": "^6.7.2",
     "babel-plugin-ember-template-compilation": "^2.2.0",
     "concurrently": "^8.0.1",
+    "ember-template-imports": "*",
     "ember-template-lint": "^5.11.2",
     "eslint": "^8.33.0",
     "eslint-config-prettier": "^9.0.0",

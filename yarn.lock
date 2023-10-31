@@ -3836,7 +3836,7 @@ content-disposition@0.5.4:
   dependencies:
     safe-buffer "5.2.1"
 
-content-tag@^1.0.0, content-tag@^1.1.2:
+content-tag@^1.0.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/content-tag/-/content-tag-1.1.2.tgz#a7adddfdd2d44c9418b795c91ee04c55f570a997"
   integrity sha512-AZkfc6TUmW+/RbZJioPzOQPAHHXqyqK4B0GNckJDjBAPK3SyGrMfn21bfFky/qwi5uoLph5sjAHUkO3CL6/IgQ==
@@ -4864,7 +4864,7 @@ ember-source@~5.4.0:
     semver "^7.5.2"
     silent-error "^1.1.1"
 
-ember-template-imports@^3.4.2:
+ember-template-imports@*, ember-template-imports@^3.4.2:
   version "3.4.2"
   resolved "https://registry.yarnpkg.com/ember-template-imports/-/ember-template-imports-3.4.2.tgz#6cf7de7d4b8348a0fddf3aaec4947aa1211289e6"
   integrity sha512-OS8TUVG2kQYYwP3netunLVfeijPoOKIs1SvPQRTNOQX4Pu8xGGBEZmrv0U1YTnQn12Eg+p6w/0UdGbUnITjyzw==
@@ -4878,15 +4878,6 @@ ember-template-imports@^3.4.2:
     parse-static-imports "^1.1.0"
     string.prototype.matchall "^4.0.6"
     validate-peer-dependencies "^1.1.0"
-
-ember-template-imports@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/ember-template-imports/-/ember-template-imports-4.0.0.tgz#e423b378bd8c479f6e4c3d269de0f40a5958b91e"
-  integrity sha512-Kw1FnFX3MrBesfsjJDFvVgOf1mANOvMprAH1ngDd5SvdlkltNWCF2UKI9WXKQV3lw5noQC1+n6S80L9Q03D3Hw==
-  dependencies:
-    broccoli-stew "^3.0.0"
-    content-tag "^1.1.2"
-    ember-cli-version-checker "^5.1.2"
 
 ember-template-lint@^5.11.2:
   version "5.11.2"

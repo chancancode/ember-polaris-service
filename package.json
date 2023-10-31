@@ -20,6 +20,7 @@
     "@glint/environment-ember-template-imports": "^1.2.0",
     "@glint/template": "^1.2.0",
     "concurrently": "^8.2.0",
+    "ember-template-imports": "^3.4.2",
     "prettier": "^3.0.3",
     "prettier-plugin-ember-template-tag": "^1.1.0",
     "typescript": "^5.0.4"
