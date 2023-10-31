@@ -1,4 +1,4 @@
-import { getOwner } from '@ember/owner';
+import { getOwner } from '@ember/application';
 import { get } from './utils.ts';
 
 export interface Scope {}
