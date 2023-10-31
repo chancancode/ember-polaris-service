@@ -59,10 +59,10 @@
     "@babel/plugin-transform-typescript": "^7.22.15",
     "@babel/runtime": "^7.17.0",
     "@embroider/addon-dev": "^4.1.0",
-    "@glint/core": "^1.2.0",
-    "@glint/environment-ember-loose": "^1.2.0",
-    "@glint/environment-ember-template-imports": "^1.2.0",
-    "@glint/template": "^1.2.0",
+    "@glint/core": "*",
+    "@glint/environment-ember-loose": "*",
+    "@glint/environment-ember-template-imports": "*",
+    "@glint/template": "*",
     "@rollup/plugin-babel": "^6.0.3",
     "@tsconfig/ember": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^6.7.2",
@@ -75,11 +75,11 @@
     "eslint-plugin-ember": "^11.11.1",
     "eslint-plugin-n": "^16.0.0",
     "eslint-plugin-prettier": "^5.0.0",
-    "prettier": "^3.0.3",
-    "prettier-plugin-ember-template-tag": "^1.1.0",
+    "prettier": "*",
+    "prettier-plugin-ember-template-tag": "*",
     "rollup": "^3.21.8",
     "rollup-plugin-copy": "^3.4.0",
-    "typescript": "^5.0.4"
+    "typescript": "*"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"

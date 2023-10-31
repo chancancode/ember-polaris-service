@@ -1486,7 +1486,7 @@
     "@glimmer/interfaces" "0.84.3"
     "@glimmer/util" "0.84.3"
 
-"@glint/core@^1.2.0":
+"@glint/core@*", "@glint/core@^1.2.0":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@glint/core/-/core-1.2.1.tgz#ab4ca9c78848da71c0dfddceab35b5314631bb61"
   integrity sha512-25Zn65aLSN1M7s0D950sTNElZYRqa6HFA0xcT03iI/vQd1F6c3luMAXbFrsTSHlktZx2dqJ38c2dUnZJQBQgMw==
@@ -1501,17 +1501,17 @@
     vscode-uri "^3.0.8"
     yargs "^17.5.1"
 
-"@glint/environment-ember-loose@^1.2.0", "@glint/environment-ember-loose@^1.2.1":
+"@glint/environment-ember-loose@*", "@glint/environment-ember-loose@^1.2.0":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@glint/environment-ember-loose/-/environment-ember-loose-1.2.1.tgz#6edcf1833395597c667e427172f20e74d72cdfe3"
   integrity sha512-ZA0Ht7vwd1FosVLtMFrB2Er62P1v6yX/UuS6z9UVR6DMPfrL5qx6vef+EGJPLBrBKZMlm7zMB6Fyca201y4hDA==
 
-"@glint/environment-ember-template-imports@^1.2.0":
+"@glint/environment-ember-template-imports@*", "@glint/environment-ember-template-imports@^1.2.0":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@glint/environment-ember-template-imports/-/environment-ember-template-imports-1.2.1.tgz#8ffe32d336aa516a8a45fa32426a8ae44297445f"
   integrity sha512-yTuF8oQyvVKmU3fCuYtg8Gf02VghQYI36x5/eob6yaMx2M+p3MFO+E6X7ANz/1bYRXphEPTWQMgdDjM4C6Ql4A==
 
-"@glint/template@^1.2.0", "@glint/template@^1.2.1":
+"@glint/template@*", "@glint/template@^1.2.0":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@glint/template/-/template-1.2.1.tgz#b17b2e490ad1826d45e7bec3b87149ca926600e3"
   integrity sha512-rlYy/93fAhYjXmTchWcwCpPFMfrqBYEskzbDYawS2oz4DVwtf4fOITLKB0QddQMI7WUCjgXAiIGZqcNa/R4YeQ==
@@ -3836,7 +3836,7 @@ content-disposition@0.5.4:
   dependencies:
     safe-buffer "5.2.1"
 
-content-tag@^1.0.0:
+content-tag@^1.0.0, content-tag@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/content-tag/-/content-tag-1.1.2.tgz#a7adddfdd2d44c9418b795c91ee04c55f570a997"
   integrity sha512-AZkfc6TUmW+/RbZJioPzOQPAHHXqyqK4B0GNckJDjBAPK3SyGrMfn21bfFky/qwi5uoLph5sjAHUkO3CL6/IgQ==
@@ -4878,6 +4878,15 @@ ember-template-imports@^3.4.2:
     parse-static-imports "^1.1.0"
     string.prototype.matchall "^4.0.6"
     validate-peer-dependencies "^1.1.0"
+
+ember-template-imports@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/ember-template-imports/-/ember-template-imports-4.0.0.tgz#e423b378bd8c479f6e4c3d269de0f40a5958b91e"
+  integrity sha512-Kw1FnFX3MrBesfsjJDFvVgOf1mANOvMprAH1ngDd5SvdlkltNWCF2UKI9WXKQV3lw5noQC1+n6S80L9Q03D3Hw==
+  dependencies:
+    broccoli-stew "^3.0.0"
+    content-tag "^1.1.2"
+    ember-cli-version-checker "^5.1.2"
 
 ember-template-lint@^5.11.2:
   version "5.11.2"
@@ -8768,7 +8777,7 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
-prettier-plugin-ember-template-tag@^1.1.0:
+prettier-plugin-ember-template-tag@*, prettier-plugin-ember-template-tag@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/prettier-plugin-ember-template-tag/-/prettier-plugin-ember-template-tag-1.1.0.tgz#b144c36736cad6c03db6612d740ad59427e616c7"
   integrity sha512-zJTC+NhEU0kHNnVh7OtcvMmkJmYTgFTist76FP9q07m9+WCvcaunR1sTFIOlGE9TH/5UGm6rlF86Umt9ouorAg==
@@ -8779,15 +8788,15 @@ prettier-plugin-ember-template-tag@^1.1.0:
     ember-template-imports "^3.4.2"
     prettier "^3.0.3"
 
+prettier@*, prettier@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.0.3.tgz#432a51f7ba422d1469096c0fdc28e235db8f9643"
+  integrity sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==
+
 prettier@^2.5.1:
   version "2.8.8"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.8.tgz#e8c5d7e98a4305ffe3de2e1fc4aca1a71c28b1da"
   integrity sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==
-
-prettier@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.0.3.tgz#432a51f7ba422d1469096c0fdc28e235db8f9643"
-  integrity sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==
 
 pretty-ms@^3.1.0:
   version "3.2.0"
@@ -10640,7 +10649,7 @@ typescript-memoize@^1.0.0-alpha.3, typescript-memoize@^1.0.1:
   resolved "https://registry.yarnpkg.com/typescript-memoize/-/typescript-memoize-1.1.1.tgz#02737495d5df6ebf72c07ba0d002e8f4cf5ccfa0"
   integrity sha512-GQ90TcKpIH4XxYTI2F98yEQYZgjNMOGPpOgdjIBhaLaWji5HPWlRnZ4AeA1hfBxtY7bCGDJsqDDHk/KaHOl5bA==
 
-typescript@^5.0.4, typescript@^5.2.2:
+typescript@*, typescript@^5.0.4:
   version "5.2.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.2.2.tgz#5ebb5e5a5b75f085f22bc3f8460fba308310fa78"
   integrity sha512-mI4WrpHsbCIcwT9cF4FZvr80QUeKvsUsUvKDoR+X/7XHQH98xYD8YHZg7ANtz2GtZt/CBq2QJ0thkGJMHfqc1w==
