@@ -1,8 +1,7 @@
 {
   "private": true,
-  "repository": "",
+  "repository": "https://github.com/chancancode/ember-polaris-service",
   "license": "MIT",
-  "author": "",
   "scripts": {
     "build": "yarn workspace ember-polaris-service run build",
     "lint": "yarn workspaces run lint",

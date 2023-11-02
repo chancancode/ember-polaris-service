@@ -1,4 +1,5 @@
 import { getOwner } from '@ember/application';
+import { assert } from '@ember/debug';
 import { get } from './utils.ts';
 
 export interface Scope {}
@@ -6,6 +7,11 @@ export interface Scope {}
 const SCOPE = Symbol('service:scope');
 
 export function setScope(object: object, scope: Scope): void {
+  assert(
+    '`setScope()` has already been called on this object previously',
+    Object.getOwnPropertyDescriptor(object, SCOPE) === undefined,
+  );
+
   Object.defineProperty(object, SCOPE, {
     configurable: false,
     enumerable: false,

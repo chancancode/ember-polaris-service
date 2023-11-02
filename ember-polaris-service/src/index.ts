@@ -3,28 +3,41 @@ export {
   type ServiceFactory,
   type ServiceManager,
   setServiceManager,
+  isServiceFactory,
 } from './manager.ts';
 export { type Scope, getScope, setScope } from './scope.ts';
+export { scoped } from './scoped.ts';
+export { singleton } from './singleton.ts';
 
 import { assert } from '@ember/debug';
 import { associateDestroyableChild } from '@ember/destroyable';
 import { lookup } from './primitives.ts';
-import { type ServiceFactory, setServiceManager } from './manager.ts';
+import {
+  type ServiceFactory,
+  setServiceManager,
+  isServiceFactory,
+} from './manager.ts';
 import { type Scope, getScope, setScope } from './scope.ts';
 
 // Is this cheating?
 export function service<S extends ServiceConstructor<unknown>>(
-  factory: S,
   scopable: object,
+  factory: S,
 ): InstanceType<S>;
-export function service<T>(service: ServiceFactory<T>, scopable: object): T;
-export function service<T>(factory: ServiceFactory<T>, scopable: object): T {
+export function service<T>(scopable: object, factory: ServiceFactory<T>): T;
+export function service<T>(scopable: object, factory: ServiceFactory<T>): T {
   const scope = getScope(scopable);
 
   assert(
-    'The second argument passed to `service()` does not have a valid scope. ' +
-      'Did you forget to call `setOwner()` or `setScope()`?',
+    'The first argument passed to `service()` does not have a valid Scope. ' +
+      'Did you forget to call `setScope()` or `setOwner`?',
     scope !== undefined,
+  );
+
+  assert(
+    'The second argument passed to `service()` is not a valid ServiceFactory. ' +
+      'Did you forget to call `setServiceManager()`?',
+    isServiceFactory(factory),
   );
 
   return lookup(scope, factory);

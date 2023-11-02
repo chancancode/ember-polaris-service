@@ -32,6 +32,16 @@ export function setServiceManager<D extends object, T>(
   return definition as D & ServiceFactory<T>;
 }
 
+export function isServiceFactory<T = unknown>(
+  factory: unknown,
+): factory is ServiceFactory<T> {
+  return (
+    factory !== null &&
+    (typeof factory === 'object' || typeof factory === 'function') &&
+    typeof (factory as Partial<ServiceFactory<T>>)[INSTANTIATE] === 'function'
+  );
+}
+
 export function instantiate<T>(scope: Scope, factory: ServiceFactory<T>): T {
   return factory[INSTANTIATE](scope);
 }

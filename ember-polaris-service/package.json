@@ -1,13 +1,12 @@
 {
   "name": "ember-polaris-service",
   "version": "0.0.0",
-  "description": "The default blueprint for Embroider v2 addons.",
+  "description": "Previewing Ember Polaris-style service injection.",
   "keywords": [
     "ember-addon"
   ],
-  "repository": "",
+  "repository": "https://github.com/chancancode/ember-polaris-service",
   "license": "MIT",
-  "author": "",
   "exports": {
     ".": {
       "types": "./declarations/index.d.ts",

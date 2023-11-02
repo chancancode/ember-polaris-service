@@ -3,5 +3,5 @@ import { service } from 'ember-polaris-service';
 import SessionService from 'test-app/services/session';
 
 export default class ApplicationController extends Controller {
-  session = service(SessionService, this);
+  session = service(this, SessionService);
 }

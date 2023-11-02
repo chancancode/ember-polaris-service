@@ -14,7 +14,7 @@ let alreadyInstantiated = false;
 export default class SessionService extends Service {
   @tracked currentUser: User | null = null;
 
-  private console = service(ConsoleService, this);
+  private console = service(this, ConsoleService);
 
   constructor(scope: Scope) {
     super(scope);
