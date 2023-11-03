@@ -1,9 +1,18 @@
 import { assert, runInDebug } from '@ember/debug';
-import { type ServiceFactory, instantiate } from './manager.ts';
+import {
+  type ServiceFactory,
+  instantiate,
+  isServiceFactory,
+} from './manager.ts';
 import { type Scope, mapFor } from './scope.ts';
 import { get } from './utils.ts';
 
 export function lookup<T>(scope: Scope, factory: ServiceFactory<T>): T {
+  assert(
+    'The second argument passed to `lookup()` is not a valid ServiceFactory.',
+    isServiceFactory(factory),
+  );
+
   const services = mapFor(scope, Services);
   let service = services.get(factory) as T | undefined;
 
@@ -21,6 +30,16 @@ export function override<T>(
   override: ServiceFactory<T>,
 ): void {
   runInDebug(() => {
+    assert(
+      'The second argument passed to `override()` is not a valid ServiceFactory.',
+      isServiceFactory(factory),
+    );
+
+    assert(
+      'The third argument passed to `override()` is not a valid ServiceFactory.',
+      isServiceFactory(override),
+    );
+
     const services = mapFor(scope, Services);
 
     if (services.has(factory)) {

@@ -4,29 +4,33 @@ import {
   setServiceManager,
 } from './manager.ts';
 
-class Singleton<T extends object> {
+class SingletonService<T extends object> {
   constructor(readonly value: T) {}
 }
 
-class PassthroughManager<T extends object>
-  implements ServiceManager<Singleton<T>, T>
+class SingletonServiceManager<T extends object>
+  implements ServiceManager<SingletonService<T>, T>
 {
-  createService(definition: Singleton<T>): T {
+  createService(definition: SingletonService<T>): T {
     return definition.value;
   }
 }
 
-const PASSTHROUGH_MANAGER = new PassthroughManager();
+const SINGLETON_SERVICE_MANAGER = new SingletonServiceManager();
+const SINGLETON_SERVICE_MANAGER_FACTORY = () => SINGLETON_SERVICE_MANAGER;
 
-setServiceManager(() => PASSTHROUGH_MANAGER, Singleton.prototype);
+setServiceManager(
+  SINGLETON_SERVICE_MANAGER_FACTORY,
+  SingletonService.prototype,
+);
 
-const Wrappers = new WeakMap<object, Singleton<object>>();
+const Wrappers = new WeakMap<object, SingletonService<object>>();
 
 export function singleton<T extends object>(value: T): ServiceFactory<T> {
   let wrapper = Wrappers.get(value);
 
   if (wrapper === undefined) {
-    wrapper = new Singleton(value);
+    wrapper = new SingletonService(value);
     Wrappers.set(value, wrapper);
   }
 
