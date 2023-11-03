@@ -1,10 +1,12 @@
 import { setOwner } from '@ember/application';
 import type Owner from '@ember/owner';
-import { service } from '@ember/service';
+import { service as _service, inject } from '@ember/service';
 import { module, test } from 'qunit';
 import { lookup } from 'ember-polaris-service';
 import { setupTest } from 'test-app/tests/helpers';
 import CompatService from 'test-app/services/compat';
+
+const service = _service ?? inject;
 
 module('Acceptance | singletons', function (hooks) {
   setupTest(hooks);
