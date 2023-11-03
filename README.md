@@ -617,6 +617,39 @@ in the traditional DI system.
 > development mode, an error will be thrown when attempting to override an
 > already instantiated service.
 
+### Interoperability
+
+With the new design, services no longer have to be placed in a specific
+location on the filesystem, as they are resolved with actual imports. That
+said, for most services, you probably do want to place them in the standard
+`app/services` folder.
+
+An modules in this folder are exposed to the traditional DI system, in that
+they will be available for lookup via `owner.lookup('service:$NAME')` or
+equivalently via the Octane `@service` decorator. However, by default, this
+will fail when you subclass from the `Service` class provided here, because
+it does not have the same instantiation protocol the traditional DI system
+expects.
+
+If you want to make your new services available this way, you can import
+from the `compat` module, which provides a shim to bridge both systems:
+
+```ts
+// my-app/services/config.ts
+import Service from 'ember-polaris-service/compat';
+
+// This class works with `lookup(...)`, `service(...)`, but also the
+// traditional `owner.lookup('service:config')` and `@service config`
+export default class ConfigService extends Service {
+  // ...
+}
+```
+
+> [!IMPORTANT]
+> Beware that, by default, modules in the `app/services` folder are always
+> included in the `@embroider/compat` build. You can opt out, partially or
+> entirely, with the `staticAppPaths` config option.
+
 ### Helpers
 
 #### Singleton services

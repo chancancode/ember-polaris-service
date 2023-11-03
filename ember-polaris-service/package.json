@@ -12,6 +12,10 @@
       "types": "./declarations/index.d.ts",
       "default": "./dist/index.js"
     },
+    "./compat": {
+      "types": "./declarations/compat/index.d.ts",
+      "default": "./dist/compat/index.js"
+    },
     "./addon-main.js": "./addon-main.cjs"
   },
   "typesVersions": {
