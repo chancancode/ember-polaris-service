@@ -27,12 +27,12 @@ import Config from 'my-app/services/config';
 import Store from '@future-ember-data-maybe/store';
 
 class MyComponent extends Component {
-  config = service(this, Config);
-  store = service(this, Store);
+  @service(Config) config;
+  @service(Store) store;
 
   // New power unlocked!
-  now = service(this, singleton(Date.now));
-  localStorage = service(this, singleton(window.localStorage));
+  @service(singleton(Date.now)) now;
+  @service(singleton(window.localStorage)) localStorage;
 
   // Use them normally:
   get color() {
@@ -70,6 +70,9 @@ test('some test', async function (assert) {
 ```
 
 ## Compatibility
+
+> [!IMPORTANT]
+> Refers to the **Interoperability** section for more details.
 
 - Ember.js v3.28 or above
 - Embroider or ember-auto-import v2
@@ -345,33 +348,75 @@ import { service } from 'ember-polaris-service';
 import MyService from 'my-app/services/my-service';
 
 export default class MyComponent extends Component {
-  myService = service(this, MyService);
+  @service(MyService) myService;
 }
 ```
+
+> [!IMPORTANT]
+> When Stage 3 decorators are available, using the `@service` decorator with
+> the `accessor` keyword is recommended. This allows the service to be lazily
+> looked up on first access, rather than eagerly during class instantiation.
+>
+> ```js
+> import Component from '@glimmer/component';
+> import { service } from 'ember-polaris-service';
+> import MyService from 'my-app/services/my-service';
+>
+> export default class MyComponent extends Component {
+>   @service(MyService) accessor myService;
+> }
+> ```
+
+> [!IMPORTANT]
+> Using the decorator form in TypeScript requires additional type annotation.
+>
+> Legacy "experimental" decorators:
+>
+> ```ts
+> import Component from '@glimmer/component';
+> import { service } from 'ember-polaris-service';
+> import MyService from 'my-app/services/my-service';
+>
+> export default class MyComponent extends Component {
+>   @service(MyService) declare myService: MyService;
+> }
+> ```
+>
+> Stage 3 decorators:
+>
+> ```ts
+> import Component from '@glimmer/component';
+> import { service } from 'ember-polaris-service';
+> import MyService from 'my-app/services/my-service';
+>
+> export default class MyComponent extends Component {
+>   @service(MyService) accessor myService!: MyService;
+> }
+> ```
+>
+> An alternative functional form is also supported:
+>
+> ```ts
+> import Component from '@glimmer/component';
+> import { service } from 'ember-polaris-service';
+> import MyService from 'my-app/services/my-service';
+>
+> export default class MyComponent extends Component {
+>   myService = service(this, MyService);
+> }
+> ```
+>
+> This eliminates the need for the type annotation, but the downside is it
+> forces an eager lookup during class instantiation.
+>
+> We are looking to hear your feedback on the real world DX implications in
+> this area. The rest of this document will use the functional form.
 
 Note that, intrinsically, this requires importing the service into scope, which
 provides the module dependency linkage needed for tree-shaking, etc. However,
 rather than hardcoding the instantiation of the dependency (`new MyService()`),
 the `service()` helper provides the needed indirection for the dependency to be
 late-bound and injected at runtime, and can be swapped out as needed.
-
-> [!NOTE]
-> A decorator version is being considered, but not yet implemented. It will
-> probably work like this:
->
-> ```js
-> class MyComponent extends Component {
->   @service(MyService) accessor myService;
-> }
-> ```
->
-> Or in TypeScript:
->
-> ```ts
-> class MyComponent extends Component {
->   @service(MyService) accessor myService!: MyService;
-> }
-> ```
 
 ### Foundations
 
@@ -619,10 +664,17 @@ in the traditional DI system.
 
 ### Interoperability
 
+#### Defining services
+
 With the new design, services no longer have to be placed in a specific
 location on the filesystem, as they are resolved with actual imports. That
 said, for most services, you probably do want to place them in the standard
 `app/services` folder.
+
+> [!IMPORTANT]
+> Beware that, by default, modules in the `app/services` folder are always
+> included in the `@embroider/compat` build. You can opt out, partially or
+> entirely, with the `staticAppPaths` config option.
 
 An modules in this folder are exposed to the traditional DI system, in that
 they will be available for lookup via `owner.lookup('service:$NAME')` or
@@ -645,10 +697,40 @@ export default class ConfigService extends Service {
 }
 ```
 
+#### Looking up services
+
+In addition to the `Service` shim, the `compat` module also provides a version
+of the `@service` decorator.
+
+```js
+import Component from '@glimmer/component';
+import { service } from 'ember-polaris-service/compat';
+import Config from 'my-app/services/config';
+import Store from '@future-ember-data-maybe/store';
+
+class MyComponent extends Component {
+  @service(Config) config;
+  @service(Store) store;
+}
+```
+
+In addition accepting `ServiceFactory` as argument, this hybrid `@service`
+decorator also allows classic services – subclasses of `@ember/service`. This
+allows you to start linking up your module dependency graph and consistently
+use the same style of service injection syntax across the codebase before
+fully migrating to this new system.
+
+When the hybrid `@service` decorator encounters a non `ServiceFactory` argument
+it falls back to a string-based lookup on the traditional DI system, using the
+property name as they key. Like the traditional `@service` decorator, it also
+optionally takes a second string argument for the lookup key, for cases where
+the property key cannot be used to identify the service (e.g. there are slashes
+in the service name).
+
 > [!IMPORTANT]
-> Beware that, by default, modules in the `app/services` folder are always
-> included in the `@embroider/compat` build. You can opt out, partially or
-> entirely, with the `staticAppPaths` config option.
+> The `service` function from the `compat` module can only be used in decorator
+> form. It cannot be used in the functional `service(this, MyService)` form. It
+> needs to see the property name for the traditional string-based lookup.
 
 ### Helpers
 
