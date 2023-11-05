@@ -1,6 +1,7 @@
 import { assert, runInDebug } from '@ember/debug';
 import {
   type ServiceFactory,
+  type ServiceInstanceType,
   instantiate,
   isServiceFactory,
 } from './manager.ts';
@@ -24,11 +25,12 @@ export function lookup<T>(scope: Scope, factory: ServiceFactory<T>): T {
   return service;
 }
 
-export function provide<T, U>(
-  factory: ServiceFactory<T>,
-  provider: ServiceFactory<T & U>,
-): void {
+export function provide<T1 extends ServiceFactory<unknown>, T2 extends T1>(
+  factory: T1,
+  provider: T2,
+): ServiceFactory<ServiceInstanceType<T2>> {
   Providers.set(factory, provider);
+  return factory as ServiceFactory<ServiceInstanceType<T2>>;
 }
 
 export function override<T>(

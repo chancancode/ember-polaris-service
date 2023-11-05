@@ -6,6 +6,9 @@ export interface ServiceFactory<T> {
   [INSTANTIATE]: (scope: Scope) => T;
 }
 
+export type ServiceInstanceType<T extends ServiceFactory<unknown>> =
+  T extends ServiceFactory<infer Instance> ? Instance : unknown;
+
 export interface ServiceManager<D extends object, T> {
   createService(definition: D): T;
 }

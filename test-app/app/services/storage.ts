@@ -1,4 +1,9 @@
-import { type ServiceFactory, service, singleton } from 'ember-polaris-service';
+import {
+  type ServiceFactory,
+  provide,
+  service,
+  singleton,
+} from 'ember-polaris-service';
 import Storage from 'ember-storage';
 import { enable } from 'ember-storage/extensions';
 import { type StorageWithBatching } from 'ember-storage-batch';
@@ -81,7 +86,21 @@ export class AppStorage extends Storage implements StorageWithBatching {
 // you will still get an error here.
 enable(AppStorage, 'batch');
 
-// We must export the original well-known token!
+// We must export the original well-known token! `provide` returns that.
+//
 // The `as ServiceFactory<AppStorage>` here makes other parts of the app
-// automatically
-export default Storage as ServiceFactory<unknown> as ServiceFactory<AppStorage>;
+// automatically.
+//
+// The type signature in `provide` is intended to make this just work without
+// the type cast, and it does work for factory functions and stuff. So e.g.
+// `provide(singleton(localStorage), factory(() => extendedStorage)) actually
+// does work the way you expect.
+//
+// However, because of how classes work in TypesScript, all subclasses of
+// Service are just considered `ServiceFactory<Service>`. The overload in
+// `service` (the function in `service.ts`) is what actually make things
+// work.
+//
+// We can add a similar overload for the primitives too, but I can't do that
+// easily right now for circular dependencies reason.
+export default provide(Storage, AppStorage) as ServiceFactory<AppStorage>;

@@ -1,5 +1,5 @@
 export { factory } from './factory.ts';
-export { lookup, override } from './primitives.ts';
+export { lookup, provide, override } from './primitives.ts';
 export {
   type ServiceFactory,
   type ServiceManager,
