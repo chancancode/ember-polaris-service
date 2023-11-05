@@ -78,7 +78,6 @@
     "prettier": "*",
     "prettier-plugin-ember-template-tag": "*",
     "rollup": "^3.21.8",
-    "rollup-plugin-copy": "^3.4.0",
     "typescript": "*"
   },
   "publishConfig": {
