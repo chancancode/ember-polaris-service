@@ -24,6 +24,13 @@ export function lookup<T>(scope: Scope, factory: ServiceFactory<T>): T {
   return service;
 }
 
+export function provide<T, U>(
+  factory: ServiceFactory<T>,
+  provider: ServiceFactory<T & U>,
+): void {
+  Providers.set(factory, provider);
+}
+
 export function override<T>(
   scope: Scope,
   factory: ServiceFactory<T>,
@@ -70,7 +77,10 @@ function factoryFor<T>(
   factory: ServiceFactory<T>,
 ): ServiceFactory<T> {
   const overrides = mapFor(scope, Overrides);
-  return (overrides.get(factory) ?? factory) as ServiceFactory<T>;
+
+  return (overrides.get(factory) ??
+    Providers.get(factory) ??
+    factory) as ServiceFactory<T>;
 }
 
 type InstantiatedServices = WeakMap<ServiceFactory<unknown>, unknown>;
@@ -81,5 +91,7 @@ type OverriddenServices = WeakMap<
 >;
 
 const Services = new WeakMap<Scope, InstantiatedServices>();
+
+const Providers: OverriddenServices = new WeakMap();
 
 const Overrides = new WeakMap<Scope, OverriddenServices>();
