@@ -1218,7 +1218,7 @@ import OpenStreetMapMappingService from './osm';
 
 export default factory((scope: Scope): MappingService => {
   // ...or based on URL, query params, global variables, etc
-  if (lookup(owner, ConfigService).useOSM) {
+  if (lookup(scope, ConfigService).useOSM) {
     return new OpenStreetMapMappingService(scope);
   } else {
     return new GoogleMappingService(scope);
