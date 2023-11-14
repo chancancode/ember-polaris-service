@@ -1,6 +1,6 @@
 {
   "name": "ember-tasks",
-  "version": "0.0.0",
+  "version": "0.5.0",
   "description": "Simple task abstraction for routing and beyond",
   "keywords": [
     "ember-addon"
