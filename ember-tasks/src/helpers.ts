@@ -29,7 +29,7 @@ export function abort<T>(reason?: unknown): Task<T> {
 
 export function promise<T>(
   promise: Promise<T>,
-  options: AbortOptions,
+  options: AbortOptions = {},
 ): Task<T> {
   const { controller, signal } = processOptions(options);
   return new PromiseTask(promise, controller, signal) as Task<T>;
@@ -37,7 +37,7 @@ export function promise<T>(
 
 export function run<T>(
   fn: RunnableFunction<T>,
-  options: AbortOptions,
+  options: AbortOptions = {},
 ): Task<T> {
   const { controller, signal } = processOptions(options, true);
   return new RunnableTask(fn, controller, signal) as Task<T>;
