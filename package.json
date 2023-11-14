@@ -3,12 +3,17 @@
   "repository": "https://github.com/chancancode/ember-polaris-service",
   "license": "MIT",
   "scripts": {
-    "build": "yarn workspace ember-polaris-service run build",
+    "build": "concurrently 'npm:build:*' --restart-after 5000 --prefix-colors cyan,white,yellow",
+    "build:routing-addon": "yarn workspace ember-polaris-routing run build",
+    "build:service-addon": "yarn workspace ember-polaris-service run build",
+    "build:tasks-addon": "yarn workspace ember-tasks run build",
     "lint": "yarn workspaces run lint",
     "lint:fix": "yarn workspaces run lint:fix",
     "prepare": "yarn build",
     "start": "concurrently 'npm:start:*' --restart-after 5000 --prefix-colors cyan,white,yellow",
-    "start:addon": "yarn workspace ember-polaris-service run start",
+    "start:routing-addon": "yarn workspace ember-polaris-routing run start",
+    "start:service-addon": "yarn workspace ember-polaris-service run start",
+    "start:tasks-addon": "yarn workspace ember-tasks run start",
     "start:test-app": "yarn workspace test-app run start",
     "test": "yarn workspaces run test",
     "test:ember": "yarn workspace test-app run test:ember"
@@ -25,7 +30,9 @@
     "typescript": "^5.0.4"
   },
   "workspaces": [
+    "ember-polaris-routing",
     "ember-polaris-service",
+    "ember-tasks",
     "test-app"
   ]
 }
