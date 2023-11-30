@@ -1,5 +1,6 @@
 import ApplicationInstance from '@ember/application/instance';
 import { assert } from '@ember/debug';
+import { destroy } from '@ember/destroyable';
 import ClassicRoute from '@ember/routing/route';
 import { precompileTemplate } from '@ember/template-compilation';
 import type Route from './index.ts';
@@ -68,6 +69,20 @@ export default function CompatRoute<R extends AnyRouteConstructor>(
         TrackedRouteParams.update(state.params, params);
       }
       return state.route;
+    }
+
+    deactivate(): void {
+      if (this.#state) {
+        destroy(this.#state.route);
+        this.#state = null;
+      }
+
+      // @ts-expect-error: we could change the model type to add `| undefined`,
+      // but no one is expected to observe this while the route is deactivated.
+      // It is also already the case that, before the model hook is ran for the
+      // first time, `currentModel` is `undefined`. So, arguably it is a bug in
+      // Ember's type to omit `undefined` on this field in the first place.
+      this.currentModel = undefined;
     }
   };
 }
