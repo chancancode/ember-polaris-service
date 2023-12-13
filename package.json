@@ -3,12 +3,19 @@
   "repository": "https://github.com/chancancode/ember-polaris-service",
   "license": "MIT",
   "scripts": {
-    "build": "yarn workspace ember-polaris-service run build",
+    "build": "concurrently 'npm:build:*' --restart-after 5000 --prefix-colors cyan,white,yellow",
+    "build:addon": "yarn workspace ember-polaris-service run build",
+    "build:ember-storage": "yarn workspace ember-storage run build",
+    "build:ember-storage-batch": "yarn workspace ember-storage-batch run build",
+    "build:ember-storage-json": "yarn workspace ember-storage-json run build",
     "lint": "yarn workspaces run lint",
     "lint:fix": "yarn workspaces run lint:fix",
     "prepare": "yarn build",
     "start": "concurrently 'npm:start:*' --restart-after 5000 --prefix-colors cyan,white,yellow",
     "start:addon": "yarn workspace ember-polaris-service run start",
+    "start:ember-storage": "yarn workspace ember-storage run start",
+    "start:ember-storage-batch": "yarn workspace ember-storage-batch run start",
+    "start:ember-storage-json": "yarn workspace ember-storage-json run start",
     "start:test-app": "yarn workspace test-app run start",
     "test": "yarn workspaces run test",
     "test:ember": "yarn workspace test-app run test:ember"
@@ -26,6 +33,7 @@
   },
   "workspaces": [
     "ember-polaris-service",
+    "extensibility/*",
     "test-app"
   ]
 }
